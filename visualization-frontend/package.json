@@ -1,7 +1,7 @@
 {
   "name": "visualization-frontend",
   "version": "0.1.0",
-  "homepage": "https://aishr.github.io/saturation-visualization",
+  "homepage": "https://nhamlv-55.github.io/saturation-visualization",
   "private": true,
   "dependencies": {
     "@types/jest": "^24.0.15",
@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
