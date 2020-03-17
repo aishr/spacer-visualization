@@ -59,6 +59,8 @@ export default class UploadModal extends React.Component<Props, State> {
                     onAfterClose={this.props.triggerFetching}
                     id="upload-modal"
                 >
+                    <span>{this.state.message}</span>
+                    <br />
                     <label>Experiment's name</label>
                     <input onChange={this.onChangeExpName.bind(this)}/>
                     <br />
@@ -69,7 +71,7 @@ export default class UploadModal extends React.Component<Props, State> {
                         onChange={(evt) => this.uploadEncoding(evt, 'spacerLog')}
                     />
                     <br />
-                    <span>stderr</span>
+                    <span>runCmd</span>
                     <input
                         ref={this.runCmdUpload}
                         type="file"
@@ -82,7 +84,7 @@ export default class UploadModal extends React.Component<Props, State> {
                         type="file"
                         onChange={(evt) => this.uploadEncoding(evt, 'inputFile')}
                     />                    <br />
-                    <button onClick={this.closeModal.bind(this)}>Cancel</button>
+                    <button onClick={this.closeModal.bind(this)}>Exit</button>
                     <button onClick={this.uploadFiles.bind(this)}>Upload</button>
                 </Modal>
             </div>
@@ -117,7 +119,7 @@ export default class UploadModal extends React.Component<Props, State> {
     async uploadFiles() {
         this.setState({
             isUploading: true,
-            message: "Waiting for Spacer...",
+            message: "Uploading the experiment...",
         });
 
         const fetchedJSON = await fetch('http://localhost:5000/spacer/upload_files', {
