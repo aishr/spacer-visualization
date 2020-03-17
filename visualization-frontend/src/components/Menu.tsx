@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import '../styles/Menu.css';
 import * as Monaco from 'monaco-editor'
 import ExpTable from './ExpTable';
+import UploadModal from './UploadModal';
 import { assert } from '../model/util';
 import MenuOptions from "./MenuOptions";
 
@@ -20,8 +21,8 @@ type Props = {
     onChangeSpacerUserOptions: (spacerUserOptions: string) => void,
     onChangeHideBracketsAssoc: (newValue: boolean) => void,
     onChangeNonStrictForNegatedStrictInequalities: (newValue: boolean) => void,
-    onChangeOrientClauses: (newValue: boolean) => void
-    onChangeVariables: (newValue: string) => void
+    onChangeOrientClauses: (newValue: boolean) => void,
+    onChangeVariables: (newValue: string) => void,
 }
 
 export class Menu extends React.Component<Props, {}> {
@@ -82,7 +83,6 @@ export class Menu extends React.Component<Props, {}> {
         return (
             <section className="component-menu">
                 <h1>Spacer Visualization</h1>
-
                 <section className="editor">
                     <div className="editor-spacer">
                         <main>
@@ -110,6 +110,9 @@ export class Menu extends React.Component<Props, {}> {
                                 onChangeVariables = {this.onChangeVariables.bind(this)}
                                 changeSpacerUserOptions={this.props.onChangeSpacerUserOptions.bind(this)}
                             />
+                            <UploadModal
+                                triggerFetching ={this.triggerFetching.bind(this)}
+                            />
                             <ExpTable/>
                         </aside>
                     </div>
@@ -122,6 +125,7 @@ export class Menu extends React.Component<Props, {}> {
         );
     }
 
+
     chooseFile() {
         if (this.fileUpload.current) {
             this.fileUpload.current.click();
@@ -130,6 +134,11 @@ export class Menu extends React.Component<Props, {}> {
 
     onChangeVariables(e) {
         this.props.onChangeVariables(e.target.value);
+
+    }
+
+    triggerFetching(){
+        window.location.reload(false);
     }
 
     uploadEncoding(event: React.ChangeEvent<HTMLInputElement>) {
