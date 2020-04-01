@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   background: #f4f5f7;
 }
 
@@ -225,4 +225,45 @@
 
 .component-menu .fake-button:active {
   box-shadow: inset 1px 3px 8px 2px rgba(0, 0, 0, .1);
+}
+
+/* MODAL */
+.upload-modal .wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+}
+
+.upload-modal .run-menu {
+    padding: 2rem 2rem 3rem;
+    text-align: center;
+    background: #f4f5f7;
+}
+
+.upload-modal .fake-button {
+    margin: 0 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 2px;
+
+    background: #64656e;
+    color: #f8f9fb;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.upload-modal .fake-button:hover {
+    color: #d4d8d9;
+    box-shadow: 1px 3px 10px 0 rgba(0, 0, 0, .1);
+}
+
+.upload-modal .fake-button:active {
+    box-shadow: inset 1px 3px 8px 2px rgba(0, 0, 0, .1);
+
+}
+
+.upload-modal input{
+    margin: 10px;
 }
