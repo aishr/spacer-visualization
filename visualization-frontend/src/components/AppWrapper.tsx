@@ -4,6 +4,7 @@ import App from "./App";
 import '../styles/AppWrapper.css';
 
 type Props = {
+    endpoint: string,
     name: string,
     problem: string,
     exp_path: string,
@@ -20,6 +21,7 @@ export class AppWrapper extends React.Component<Props, {}> {
         return (
             <div id="appWrapper">
                 <App 
+                    endpoint = {this.props.endpoint}
                     name = {this.props.name}
                     problem={this.props.problem}
                     exp_path = {this.props.exp_path}

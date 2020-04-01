@@ -3,6 +3,7 @@ import '../styles/NodeMenu.css';
 import {Link} from 'react-router-dom';
 
 type Props = {
+    endpoint: string,
 };
 type State = {
     isFetching: boolean,
@@ -38,7 +39,7 @@ export default class ExpTable extends React.Component<Props, State> {
             isFetching: true,
         });
 
-        const fetchedJSON = await fetch('http://localhost:5000/spacer/fetch_exps', {
+        const fetchedJSON = await fetch(this.props.endpoint + '/spacer/fetch_exps', {
             method: 'POST',
             mode: 'cors',
             headers: {

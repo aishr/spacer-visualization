@@ -10,12 +10,14 @@ import MenuOptions from "./MenuOptions";
 const icons = require('../resources/icons/all.svg') as string;
 
 type Props = {
+    endpoint: string,
     problem: string,
     problemName: string,
     spacerUserOptions: string,
     hideBracketsAssoc: boolean,
     nonStrictForNegatedStrictInequalities: boolean
     orientClauses: boolean,
+    onChangeEndpoint: (endpoint: string)=> void,
     onChangeProblem: (problem: string) => void,
     onChangeProblemName: (problemName: string) => void,
     onChangeSpacerUserOptions: (spacerUserOptions: string) => void,
@@ -105,15 +107,23 @@ export class Menu extends React.Component<Props, {}> {
                         </main>
 
                         <aside>
-                            <MenuOptions 
+                            <label htmlFor="endpoint" className="form-label">Endpoint: </label>
+                            <input type="text"
+                                   name="endpoint"
+                                   onChange={(e)=>{this.props.onChangeEndpoint(e.target.value)}}
+                                   value={this.props.endpoint}
+                            />
+                            <MenuOptions
                                 spacerUserOptions = {this.props.spacerUserOptions}
                                 onChangeVariables = {this.onChangeVariables.bind(this)}
                                 changeSpacerUserOptions={this.props.onChangeSpacerUserOptions.bind(this)}
                             />
                             <UploadModal
+                                endpoint = {this.props.endpoint}
                                 triggerFetching ={this.triggerFetching.bind(this)}
                             />
-                            <ExpTable/>
+                            <ExpTable
+                            endpoint = {this.props.endpoint}/>
                         </aside>
                     </div>
                 </section>

@@ -4,6 +4,7 @@ import { AppWrapper } from './AppWrapper'
 import { Menu } from './Menu';
 import { RouteComponentProps } from 'react-router';
 type State = {
+    endpoint: string,
     problem: string,
     problemName: string,
     spacerUserOptions: string,
@@ -16,6 +17,7 @@ type State = {
 export class AppRouter extends React.Component<{} & RouteComponentProps<{}>, State> {
 
     state: State = {
+        endpoint: "http://localhost:5000",
         problem: "",
         problemName: "",
         spacerUserOptions: "fp.spacer.max_level=4 fp.spacer.dump_benchmarks=true fp.spacer.arith.solver=6",
@@ -30,19 +32,21 @@ export class AppRouter extends React.Component<{} & RouteComponentProps<{}>, Sta
             <HashRouter>
                 <Route path="/" exact render={() => 
                     <Menu 
-                        problem={this.state.problem}
-                                problemName={this.state.problemName}
-                                spacerUserOptions={this.state.spacerUserOptions}
-                                hideBracketsAssoc={this.state.hideBracketsAssoc}
-                                nonStrictForNegatedStrictInequalities={this.state.nonStrictForNegatedStrictInequalities}
-                                orientClauses={this.state.orientClauses}
-                                onChangeProblem={this.changeProblem.bind(this)}
-                                onChangeProblemName={this.changeProblemName.bind(this)}
-                                onChangeSpacerUserOptions={this.changeSpacerUserOptions.bind(this)}
-                                onChangeHideBracketsAssoc={this.changeHideBracketsAssoc.bind(this)}
-                                onChangeNonStrictForNegatedStrictInequalities={this.changeNonStrictForNegatedStrictInequalities.bind(this)}
-                                onChangeOrientClauses={this.changeOrientClauses.bind(this)}
-                                onChangeVariables={this.changeVariables.bind(this)}
+                        endpoint={this.state.endpoint}
+                                 problem={this.state.problem}
+                                 problemName={this.state.problemName}
+                                 spacerUserOptions={this.state.spacerUserOptions}
+                                 hideBracketsAssoc={this.state.hideBracketsAssoc}
+                                 nonStrictForNegatedStrictInequalities={this.state.nonStrictForNegatedStrictInequalities}
+                                 orientClauses={this.state.orientClauses}
+                                 onChangeEndpoint={this.changeEndpoint.bind(this)}
+                                 onChangeProblem={this.changeProblem.bind(this)}
+                                 onChangeProblemName={this.changeProblemName.bind(this)}
+                                 onChangeSpacerUserOptions={this.changeSpacerUserOptions.bind(this)}
+                                 onChangeHideBracketsAssoc={this.changeHideBracketsAssoc.bind(this)}
+                                 onChangeNonStrictForNegatedStrictInequalities={this.changeNonStrictForNegatedStrictInequalities.bind(this)}
+                                 onChangeOrientClauses={this.changeOrientClauses.bind(this)}
+                                 onChangeVariables={this.changeVariables.bind(this)}
                     />
                 }/>
                 <Route path="/replay/:exp_id" render={({match}) => 
@@ -58,6 +62,7 @@ export class AppRouter extends React.Component<{} & RouteComponentProps<{}>, Sta
     appComponent(mode: "replay" | "iterative", exp_path: string) {
         const spacerUserOptions = `${this.state.spacerUserOptions}`;
         return <AppWrapper
+        endpoint = {this.state.endpoint}
         name={this.state.problemName}
         exp_path ={exp_path}
         mode={mode}
@@ -69,7 +74,9 @@ export class AppRouter extends React.Component<{} & RouteComponentProps<{}>, Sta
         varNames={this.state.varNames}
         />
     }
-
+    changeEndpoint(endpoint: string) {
+        this.setState({endpoint: endpoint});
+    }
     changeProblem(problem: string) {
         this.setState({problem: problem});
     }

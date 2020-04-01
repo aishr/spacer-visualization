@@ -9,6 +9,7 @@ import {toReadable} from "../helpers/readable";
 import {buildExprMap, buildPobLemmasMap} from "../helpers/network";
 
 type Props = {
+    endpoint: string,
     name: string,
     exp_path: string,
     mode: "proof" | "replay" | "iterative",
@@ -71,7 +72,7 @@ class App extends Component<Props, State> {
             message: "Poking Spacer...",
         });
 
-        const fetchedJSON = await fetch('http://localhost:5000/spacer/poke', {
+        const fetchedJSON = await fetch(this.props.endpoint+'/spacer/poke', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -130,7 +131,7 @@ class App extends Component<Props, State> {
             message: "Waiting for Spacer...",
         });
 
-        const fetchedJSON = await fetch('http://localhost:5000/spacer/start_iterative', {
+        const fetchedJSON = await fetch(this.props.endpoint+'/spacer/start_iterative', {
             method: 'POST',
             mode: 'cors',
             headers: {
